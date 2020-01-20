@@ -8,12 +8,15 @@
 
 #define LED3_ORANGE_RCC_GPIOx 		RCC_AHB1Periph_GPIOG
 #define LED5_RED_RCC_GPIOx 				RCC_AHB1Periph_GPIOG
+#define LED_EXT_RCC_GPIOx 				RCC_AHB1Periph_GPIOA
 
 #define LED3_ORANGE_GPIOx 				GPIOG
 #define LED5_RED_GPIOx 						GPIOG
+#define LED_EXT_GPIOx 				    GPIOA
 
 #define LED3_ORANGE_PinNumber 		GPIO_Pin_13
 #define LED5_RED_PinNumber 				GPIO_Pin_14
+#define LED_EXT_PinNumber 				GPIO_Pin_4
 
 #define LED3_ORANGE_ID 						1
 #define LED5_RED_ID 							2
