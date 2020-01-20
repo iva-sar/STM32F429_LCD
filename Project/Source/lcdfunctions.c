@@ -10,7 +10,7 @@ void StartScreen(void){
   LCD_SetFont(&Font16x24);
   LCD_SetTextColor(LCD_COLOR_BLACK);
   LCD_DisplayStringLine(LINE(3), (uint8_t*)"  Temperatura:");
-	LCD_DisplayStringLine(LINE(5), (uint8_t*)"     25   ");
+	//LCD_DisplayStringLine(LINE(5), (uint8_t*)"     25   ");
 }
 
 void OpenWin(void){

@@ -13,6 +13,7 @@
 #include <MQ-2.h>
 #include <MQ-7.h>
 #include <MQ-135.h>
+#include <LM35.h>
 
 #include <lcdfunctions.h>
 #include "stm32f4xx_dac.h"
