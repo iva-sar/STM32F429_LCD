@@ -16,19 +16,19 @@ NVIC_InitTypeDef NVIC_InitStructure;
 	
 		// enable peripheral clocks (note: different bus interfaces for each peripheral!)
 		RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 	
 		// map port B pins for alternate function
-		GPIO_InitStruct.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7; // Pins 6 (TX) and 7 (RX) will be used for USART1
+		GPIO_InitStruct.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10; // Pins 6 (TX) and 7 (RX) will be used for USART1
 		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF; 					// GPIO pins defined as alternate function
 		GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz; 			// I/O pins speed (signal rise time)
 		GPIO_InitStruct.GPIO_OType = GPIO_OType_PP; 				// push-pull output
 		GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP; 					// activates pullup resistors
-		GPIO_Init(GPIOB, &GPIO_InitStruct); 								// set chosen pins
+		GPIO_Init(GPIOA, &GPIO_InitStruct); 								// set chosen pins
 	
 		// set alternate function to USART1 (from multiple possible alternate function choices)
-		GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_USART1); // pins will automatically be assigned to TX/RX - refer to datasheet to see AF mappings
-		GPIO_PinAFConfig(GPIOB, GPIO_PinSource7, GPIO_AF_USART1);
+		GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1); // pins will automatically be assigned to TX/RX - refer to datasheet to see AF mappings
+		GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1);
 	
 		// use USART_InitStruct to config USART1 peripheral
 		USART_InitStruct.USART_BaudRate = BAUDRATE; 							// set baudrate from define

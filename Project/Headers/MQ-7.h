@@ -17,6 +17,6 @@
 #define MQ_7_ADC_CHANNEL	ADC_Channel_1
 
 float MQ_7_read (void);
-void ADC2_Init (void);
+void ADC3_Init (void);
 
 #endif

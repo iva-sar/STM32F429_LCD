@@ -10,13 +10,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MQ_135_RCC_ADC			RCC_APB2Periph_ADC1
+#define MQ_135_RCC_ADC			RCC_APB2Periph_ADC2
 #define MQ_135_RCC_GPIO			RCC_AHB1Periph_GPIOA
 #define MQ_135_PIN					GPIO_Pin_2
-#define MQ_135_ADC					ADC1
-#define MQ_135_ADC_CHANNEL	ADC_Channel_1
+#define MQ_135_ADC					ADC2
+#define MQ_135_ADC_CHANNEL	ADC_Channel_2
 
-float MQ_135_read (void);
-void ADC3_Init (void);
+void MQ_135_read (void);
+void ADC2_Init (void);
 
 #endif

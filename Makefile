@@ -1,13 +1,3 @@
-################################################################################
-# Project: STM32F4_TwoPlayerGame_Project17-18
-#
-# Module: top module
-#
-# Author: Ivan Pavic (@dumpram)
-#
-# version: 0.0.0
-################################################################################
-
 MODULE_NAME = STM32F42PG
 
 # STLINK path
@@ -44,7 +34,7 @@ CFLAGS = -Wall \
 AFLAGS += -x assembler-with-cpp
 
 # Linker flags
-LDFLAGS = -specs=nosys.specs -specs=nano.specs -mcpu=cortex-m4 -mthumb
+LDFLAGS = -specs=nosys.specs -specs=nano.specs -mcpu=cortex-m4 -mthumb -lm
 
 INC =  -I $(SPL)/inc
 INC += -I $(CMSIS)/Include
@@ -102,6 +92,9 @@ app.elf : $(AOBJ) $(OBJ)
 	-lc  \
 	-T$(LINKER_SCRIPT)
 	@echo "$(MODULE_NAME): Linked app successfully!"
+
+gen_asm: Project/Source/MQ-135.c
+	$(CC) $(CFLAGS) -S $^
 
 clean :
 	rm -f app.elf app.bin
