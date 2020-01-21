@@ -1,3 +1,4 @@
+
 MODULE_NAME = STM32F42PG
 
 # STLINK path
@@ -24,17 +25,16 @@ STARTUP = $(CMSIS)/Device/ST/STM32F4xx/Source/Templates/gcc_ride7
 CFLAGS = -Wall \
          -mcpu=cortex-m4 \
          -mthumb \
-         -mfloat-abi=softfp \
-         -fomit-frame-pointer \
+         -mfloat-abi=hard \
          -fno-strict-aliasing \
          -specs=nosys.specs \
-         -specs=nano.specs
+				 -mfpu=fpv4-sp-d16
 
 # Assembler flags
 AFLAGS += -x assembler-with-cpp
 
 # Linker flags
-LDFLAGS = -specs=nosys.specs -specs=nano.specs -mcpu=cortex-m4 -mthumb -lm
+LDFLAGS = -lm -specs=nosys.specs -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 
 INC =  -I $(SPL)/inc
 INC += -I $(CMSIS)/Include
@@ -92,9 +92,6 @@ app.elf : $(AOBJ) $(OBJ)
 	-lc  \
 	-T$(LINKER_SCRIPT)
 	@echo "$(MODULE_NAME): Linked app successfully!"
-
-gen_asm: Project/Source/MQ-135.c
-	$(CC) $(CFLAGS) -S $^
 
 clean :
 	rm -f app.elf app.bin

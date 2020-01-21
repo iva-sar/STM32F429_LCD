@@ -21,22 +21,51 @@ void ADC1_Init (void){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_4, 1, ADC_SampleTime_144Cycles);
 }
 
-float MQ_2_read (void) {
+void MQ_2_read (void) {
+	uint16_t data, dec;
+  float temp;
+	int i,zastavica=0;
+	char array[50] ={0};
+	ADC_SoftwareStartConv(ADC1);
+	data=ADC_GetConversionValue(ADC1);
+	temp=((data/1024.0)*5);
+	dec = (temp - (int)temp)*1000;
+
+	if (temp > 0.6){
+		zastavica=1;
+		OpenWin();
+	};
+	
+	if (zastavica==1 && temp<0.6){
+		StartScreen();
+		zastavica=0;
+	};
+
+	USART1_SendChar('2');
+  sprintf((array), "%d.%d", (int)temp, dec);
+	Write(array, 5);
+	for(i=0; array[i] != '\0'; ++i){
+			USART1_SendChar(array[i]);
+		}
+	USART1_SendChar(0x0A);
+	USART1_SendChar(0x0D);
+}
+
+int MQ_2_flag (void){
+
 	uint16_t data;
 	float temp;
-	// int i;
-	// char array[10];
+	float border = 0.35;
 
 	ADC_SoftwareStartConv(ADC1);
 	data=ADC_GetConversionValue(ADC1);
-	temp=(data*5/1024);
+	temp=((data/1024.0)*3);
 
-	return temp;
-	// sprintf((char *)(array), "%3.6f\n", temp);
-	// USART1_SendChar('L');
-	// for(i=0; i<sizeof(array)-3; ++i){
-	// 		USART1_SendChar(array[i]);
-	// 	}
-	// USART1_SendChar(0x0A);
-	// USART1_SendChar(0x0D);
+	if (temp > 0.2){
+		OpenWin();
+		return 1;
+		}
+	else{
+		return 0;
+	}
 }

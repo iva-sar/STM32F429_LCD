@@ -9,7 +9,8 @@ void StartScreen(void){
   LCD_Clear(LCD_COLOR_WHITE);
   LCD_SetFont(&Font16x24);
   LCD_SetTextColor(LCD_COLOR_BLACK);
-  LCD_DisplayStringLine(LINE(3), (uint8_t*)"  Temperatura:");
+  LCD_DisplayStringLine(LINE(3), (uint8_t*)"Kvaliteta zraka:");
+	LCD_DisplayStringLine(LINE(8), (uint8_t*)"   ZRAK OK!  ");
 	//LCD_DisplayStringLine(LINE(5), (uint8_t*)"     25   ");
 }
 
@@ -21,8 +22,9 @@ void OpenWin(void){
   LCD_Clear(LCD_COLOR_WHITE);
   LCD_SetFont(&Font16x24);
   LCD_SetTextColor(LCD_COLOR_RED);
-  LCD_DisplayStringLine(LINE(3), (uint8_t*)"   OTVORITE  ");
-	LCD_DisplayStringLine(LINE(5), (uint8_t*)"    PROZOR!  ");
+	LCD_DisplayStringLine(LINE(3), (uint8_t*)"Kvaliteta zraka:");
+  LCD_DisplayStringLine(LINE(8), (uint8_t*)"   OTVORITE  ");
+	LCD_DisplayStringLine(LINE(9), (uint8_t*)"    PROZOR!  ");
 }
 
 void ClearScreen (void) {

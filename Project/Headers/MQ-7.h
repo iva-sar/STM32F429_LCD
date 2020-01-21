@@ -9,14 +9,10 @@
 #include "stm32f4xx_adc.h"
 #include <stdio.h>
 #include <string.h>
+#include <lcdfunctions.h>
 
-#define MQ_7_RCC_ADC			RCC_APB2Periph_ADC1
-#define MQ_7_RCC_GPIO			RCC_AHB1Periph_GPIOA
-#define MQ_7_PIN					GPIO_Pin_3
-#define MQ_7_ADC					ADC1
-#define MQ_7_ADC_CHANNEL	ADC_Channel_1
-
-float MQ_7_read (void);
+void MQ_7_read (void);
 void ADC3_Init (void);
+int MQ_7_flag (void);
 
 #endif

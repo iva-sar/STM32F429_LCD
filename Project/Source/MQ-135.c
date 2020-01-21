@@ -22,21 +22,51 @@ void ADC2_Init (void){
 }
 
 void MQ_135_read (void) {
-	uint16_t data;
-	float temp;
-	int i;
-	char array[10];
+	uint16_t data, dec;
+  float temp;
+	int i, zastavica=0;
+	char array[50] ={0};
 
-	USART1_SendChar('P');
 	ADC_SoftwareStartConv(ADC2);
 	data=ADC_GetConversionValue(ADC2);
-	temp=((float)data/1024.0f)*5.0f;
+	temp=((data/1024.0)*5);
+	dec = (temp - (int)temp)*1000;
 
-	sprintf((array), "%3.6f\n", temp);
-	USART1_SendChar('L');
-	//for(i=0; i<sizeof(array)-3; ++i){
-			//USART1_SendChar(array[i]);
-		//}
-	// USART1_SendChar(0x0A);
-	// USART1_SendChar(0x0D);
+	if (temp > 1.6){
+		zastavica=1;
+		OpenWin();
+	};
+	if (zastavica == 1 && temp<1.6){
+		StartScreen();
+		USART1_SendChar('a');
+		zastavica=0;
+	};
+
+ 	USART1_SendChar('5');
+  sprintf((array), "%d.%d", (int)temp, dec);
+	Write(array, 6);
+	for(i=0; array[i] != '\0'; ++i){
+			USART1_SendChar(array[i]);
+		}
+	USART1_SendChar(0x0A);
+	USART1_SendChar(0x0D);
+}
+
+int MQ_135_flag (void){
+
+	uint16_t data;
+	float temp;
+	float border = 0.63;
+
+	ADC_SoftwareStartConv(ADC1);
+	data=ADC_GetConversionValue(ADC1);
+	temp=((data/1024.0)*3);
+
+	if (temp > border){
+		OpenWin();
+		return 1;
+		}
+	else{
+		return 0;
+	}
 }
